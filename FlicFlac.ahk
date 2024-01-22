@@ -130,7 +130,8 @@ Init:
   IniRead SelectedFormat  ,%IniFile%, Recent, SelectedFormat, 1
   IniRead GuiAlwaysOnTop  ,%IniFile%, Recent, AlwaysOnTopState, 1
   IniRead GuiDeleteInput  ,%IniFile%, Recent, DeleteInputState, 1  
-  
+
+  FFMpegLocation := TempFolder . "\ffmpeg.exe"
   ApeLocation    := TempFolder . "\MAC.exe"      
   FlacLocation   := TempFolder . "\flac.exe"      
   LameLocation   := TempFolder . "\lame.exe"      
@@ -139,6 +140,8 @@ Init:
   FaadLocation   := TempFolder . "\faad.exe"
   
   ; Install encoders
+
+  FileInstall ffmpeg.exe, %FFMpegLocation%
   FileInstall MAC.exe, %ApeLocation%
   FileInstall flac.exe, %FlacLocation%
   FileInstall lame.exe, %LameLocation%
@@ -160,7 +163,9 @@ Init:
     ErrString .= "Missing MAC.exe (" . MacLocation . ")`n"
   If( Not FileExist( FaadLocation ) )
     ErrString .= "Missing faad.exe (" . FaadLocation . ")`n"
-    
+  If( Not FileExist( FFMpegLocation ) )
+    ErrString .= "Missing ffmpeg.exe (" . FlacLocation . ")`n"
+
   If( ErrString ) {
     ErrorMessage( "Some files that are required for the operation of " . NameString . " are missing.`n`n" . ErrString )
     Gosub Exit
@@ -390,7 +395,7 @@ GetCommandLine( contype ) {
   LameOptions := LameOptions%EncMode%
   
   ; Native
-  clWAV2MP3   = "%LameLocation%" %LameOptions% "`%Filename`%" "`%NameNoExt`%.mp3"
+  clWAV2MP3   = "%FFMpegLocation%" -i "`%Filename`%" -af "pan=7.1|c0=c0-c1+c2+c3-c4+c5+c6|c1=c7-c8+c9+c10+c11+c12|c2=c31+c1-c30|c3=c13+c14|c4=c0+c1+c2-c19+c22+c29|c5=c15+c16+c17-c18|c6=c20+c21-c22+c23+c24+c25|c7=c26+c27-c28+c29+c30-c31" | "%LameLocation%" %LameOptions% - "`%NameNoExt`%.mp3"
   clWAV2OGG   = "%OggEncLocation%" %OggOptions% "`%Filename`%"
   clWAV2APE   = "%ApeLocation%" "`%Filename`%" "`%NameNoExt`%.ape" -c%ApeCompression%
   clWAV2FLAC  = "%FlacLocation%" %FlacOptions% "`%Filename`%"
