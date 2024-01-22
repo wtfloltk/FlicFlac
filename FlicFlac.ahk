@@ -396,9 +396,9 @@ GetCommandLine( contype ) {
   
   ; Native
   clWAV2MP3   = "%FFMpegLocation%" -i "`%Filename`%" -af "pan=7.1|c0=c0-c1+c2+c3-c4+c5+c6|c1=c7-c8+c9+c10+c11+c12|c2=c31+c1-c30|c3=c13+c14|c4=c0+c1+c2-c19+c22+c29|c5=c15+c16+c17-c18|c6=c20+c21-c22+c23+c24+c25|c7=c26+c27-c28+c29+c30-c31" | "%LameLocation%" %LameOptions% - "`%NameNoExt`%.mp3"
-  clWAV2OGG   = "%OggEncLocation%" %OggOptions% "`%Filename`%"
-  clWAV2APE   = "%ApeLocation%" "`%Filename`%" "`%NameNoExt`%.ape" -c%ApeCompression%
-  clWAV2FLAC  = "%FlacLocation%" %FlacOptions% "`%Filename`%"
+  clWAV2OGG   = "%FFMpegLocation%" -i "`%Filename`%" -af "pan=7.1|c0=c0-c1+c2+c3-c4+c5+c6|c1=c7-c8+c9+c10+c11+c12|c2=c31+c1-c30|c3=c13+c14|c4=c0+c1+c2-c19+c22+c29|c5=c15+c16+c17-c18|c6=c20+c21-c22+c23+c24+c25|c7=c26+c27-c28+c29+c30-c31" | "%OggEncLocation%" %OggOptions% -
+  clWAV2APE   = "%FFMpegLocation%" -i "`%Filename`%" -af "pan=7.1|c0=c0-c1+c2+c3-c4+c5+c6|c1=c7-c8+c9+c10+c11+c12|c2=c31+c1-c30|c3=c13+c14|c4=c0+c1+c2-c19+c22+c29|c5=c15+c16+c17-c18|c6=c20+c21-c22+c23+c24+c25|c7=c26+c27-c28+c29+c30-c31" | "%ApeLocation%" - "`%NameNoExt`%.ape" -c%ApeCompression%
+  clWAV2FLAC  = "%FFMpegLocation%" -i "`%Filename`%" -af "pan=7.1|c0=c0-c1+c2+c3-c4+c5+c6|c1=c7-c8+c9+c10+c11+c12|c2=c31+c1-c30|c3=c13+c14|c4=c0+c1+c2-c19+c22+c29|c5=c15+c16+c17-c18|c6=c20+c21-c22+c23+c24+c25|c7=c26+c27-c28+c29+c30-c31" | "%FlacLocation%" %FlacOptions% -
   clMP32WAV   = "%LameLocation%" %LameOptionsDec% "`%Filename`%" "`%NameNoExt`%.wav"
   clFLAC2WAV  = "%FlacLocation%" %FlacOptionsDec% "`%Filename`%"
   clFLAC2OGG  = "%OggEncLocation%" %OggOptions% "`%Filename`%"
