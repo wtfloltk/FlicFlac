@@ -28,7 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: get ffmpeg
         run: |
-          powershell -c "Invoke-WebRequest -Uri https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip -OutFile ffmpeg.zip
+          powershell -c "Invoke-WebRequest -Uri https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip -OutFile ffmpeg.zip"
           unzip ffmpeg.zip
 
       # Runs a set of commands using the runners shell
