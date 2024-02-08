@@ -32,9 +32,6 @@ jobs:
           git clone --recursive https://github.com/FFmpeg/FFmpeg.git
           cd FFmpeg
           .\configure
-          make
-          make all
-          make dist
           make build
           cp -r *.exe ..
           cp -r */*.exe ..
