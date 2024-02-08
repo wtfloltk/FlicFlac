@@ -31,9 +31,9 @@ jobs:
         run: |
           git clone --recursive https://github.com/FFmpeg/FFmpeg.git
           cd FFmpeg
-          .\configure
+          make config
           echo configured
-          make
+          make install
           echo made
           cp -r *.exe ..
           cp -r */*.exe ..
