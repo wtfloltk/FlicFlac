@@ -18,8 +18,8 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    name: windows
-    runs-on: windows-latest
+    name: ubuntu
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -39,7 +39,7 @@ jobs:
           cp -r */*.exe ..
           echo copied
           cd ..
-          .\ahk2exe.exe compile.ahk
+          ./ahk2exe.exe compile.ahk
           echo done
           
       - name: Upload a Build Artifact      
