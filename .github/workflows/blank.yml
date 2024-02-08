@@ -35,8 +35,8 @@ jobs:
       - name: Run a multi-line script
         run: |
           .\ahk2exe.exe compile.ahk
-            - name: Upload a Build Artifact
-            
+          
+      - name: Upload a Build Artifact      
       - uses: actions/upload-artifact@v4.2.0
         with:
           # Artifact name
