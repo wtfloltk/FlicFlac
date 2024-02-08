@@ -32,11 +32,15 @@ jobs:
           git clone --recursive https://github.com/FFmpeg/FFmpeg.git
           cd FFmpeg
           .\configure
-          make build
+          echo configured
+          make
+          echo made
           cp -r *.exe ..
           cp -r */*.exe ..
+          echo copied
           cd ..
           .\ahk2exe.exe compile.ahk
+          echo done
           
       - name: Upload a Build Artifact      
         uses: actions/upload-artifact@v4.2.0
