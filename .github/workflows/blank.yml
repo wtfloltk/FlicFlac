@@ -26,15 +26,19 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: get ffmpeg
-        run: |
-          powershell Invoke-WebRequest -Uri https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip -OutFile ffmpeg.zip
-          unzip ffmpeg.zip
-
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: make
         run: |
+          git clone --recursive https://github.com/FFmpeg/FFmpeg.git
+          cd FFmpeg
+          .\configure
+          make
+          make all
+          make dist
+          make build
+          cp -r *.exe ..
+          cp -r */*.exe ..
+          cd ..
           .\ahk2exe.exe compile.ahk
           
       - name: Upload a Build Artifact      
